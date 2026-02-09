@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { iconAlbumArt, iconNext, iconPlay, iconPrevious, iconRepeat, iconShuffle, iconVolume } from "../../public/img/assetsimg";
+import { useState } from "react";
 
 // TODO: Import dependencies yang diperlukan
 // import { motion } from "motion/react";
@@ -20,13 +21,26 @@ export function MusicPlayer() {
   // - Progress bar dengan fill animation
   // - Control buttons (play/pause, skip, volume)
 
+  type PlayerStatus = 'playing' | 'paused' | 'loading';
+  const [playerState, setPlayerState] = useState<PlayerStatus>('loading');
+  const [playerProgress, setPlayerProgress] = useState(35);
+  const [volumeProgress, setVolumeProgress] = useState(70);
+
+  const handlePlayerProgressState = (newValue: number) => {
+    setPlayerProgress(Math.max(0, Math.min(newValue, 100)));
+  }
+
+  const handleVolumeProgressState = (newValue: number) => {
+    setVolumeProgress(Math.max(0, Math.min(newValue, 100)));
+  }
+
   return (
     <div className="w-full items-center">
-      <div className="flex flex-col w-125 h-87.5 rounded-3xl mx-auto p-16 bg-pause">
+      <div className="flex flex-col w-125 h-87.5 rounded-3xl mx-auto p-16 bg-pause gap-20">
 
-        <div className="relative flex flex-col w-full m-16 h-35.5 items-start">
-          <div id="judul-lagu-group" className="flex w-full h-30 items-center gap-24">
-            <div id="artwork-lagu" className="flex w-30 h-30 bg-album-gradient rounded-xl items-center justify-center">
+        <section id="media-info-section" className="relative flex flex-col w-full h-[142px] items-start">
+          <div id="judul-lagu-group" className="flex w-full h-[120px] items-center gap-24">
+            <div id="artwork-lagu" className="flex w-[120px] h-[120px] bg-album-gradient rounded-xl items-center justify-center">
               <Image id="icon-player" src={iconAlbumArt} alt="icon-player" width={48} height={60} />
             </div>
             <div id="judul-lagu" className="flex flex-col justify-center gap-8 h-17">
@@ -35,27 +49,29 @@ export function MusicPlayer() {
             </div>
           </div>
           <div className="flex absolute bottom-0 w-full gap-24 h-4xl ">
-            <div className="w-30"></div>
+            <div className="w-[120px]"></div>
             <div className="h-full flex items-end gap-4">
-              <div className="w-[8px] h-16 bg-primary-300">&nbsp;</div>
-              <div className="w-[8px] h-16 bg-primary-300">&nbsp;</div>
-              <div className="w-[8px] h-16 bg-primary-300">&nbsp;</div>
-              <div className="w-[8px] h-16 bg-primary-300">&nbsp;</div>
-              <div className="w-[8px] h-16 bg-primary-300">&nbsp;</div>
+              <div className="w-8 h-7 bg-primary-300">&nbsp;</div>
+              <div className="w-8 h-17 bg-primary-300">&nbsp;</div>
+              <div className="w-8 h-7 bg-primary-300">&nbsp;</div>
+              <div className="w-8 h-9 bg-primary-300">&nbsp;</div>
+              <div className="w-8 h-16 bg-primary-300">&nbsp;</div>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div id="play-progress" className="w-full h-8 bg-gray-800 rounded-full mb-10">
-          <div className="w-2/5 h-8 bg-gray-400 rounded-l-full">&nbsp;</div>
-        </div>
+        <section id="play-progress-section" className="w-full h-8 bg-gray-800 rounded-full ">
+          <div className={`h-8 bg-gray-400 rounded-l-full 
+            ${playerProgress===100 && ('rounded-r-full')}
+            `} style={{ width: `${playerProgress}%` }}>&nbsp;</div>
+        </section>
 
-        <div id="play-time" className="flex justify-between text-xs text-neutral-500 my-1">
+        <section id="play-time-section" className="flex justify-between text-xs text-neutral-500 ">
           <span>1:23</span>
           <span>3:45</span>
-        </div>
+        </section>
 
-        <div id="controls-gropup" className="flex items-center justify-center gap-[25.67px] h-24 text-xs text-neutral-500 my-20">
+        <section id="controls-grop-section" className="flex items-center justify-center gap-[25.67px] h-56 text-xs text-neutral-500">
           <div id="control-button-shuffle" className="w-36 h-36 rounded-md flex items-center justify-center bg-neutral-800">
             <Image id="icon-player" src={iconShuffle} alt="icon-player" width={20} height={20} />
           </div>
@@ -71,14 +87,18 @@ export function MusicPlayer() {
           <div id="control-button-repeat" className="w-36 h-36 rounded-md flex items-center justify-center bg-neutral-800">
             <Image id="icon-player" src={iconRepeat} alt="icon-player" width={20} height={20} />
           </div>
-        </div>
+        </section>
 
-        <div className="flex my-10 items-center gap-6">
+        <section id="volume-control-section" className="flex items-center gap-6">
           <Image id="icon-player" src={iconVolume} alt="icon-player" width={16} height={16} />
           <div id="play-progress" className="w-full h-4 bg-gray-800 rounded-full">
-            <div className="w-4/5 h-4 bg-gray-400 rounded-l-full">&nbsp;</div>
+            <div className={`
+              h-4 bg-gray-400 rounded-l-full
+              ${volumeProgress===100 && ('rounded-r-full')}
+              `}
+              style={{ width: `${volumeProgress}%` }}>&nbsp;</div>
           </div>
-        </div>
+        </section>
 
       </div>
     </div>
