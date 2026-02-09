@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { iconAlbumArt, iconNext, iconPlay, iconPrevious, iconRepeat, iconShuffle, iconVolume } from "../../public/img/assetsimg";
+import { iconAlbumArt, iconNext, iconPause, iconPlay, iconPrevious, iconRepeat, iconShuffle, iconVolume } from "../../public/img/assetsimg";
 import { useState } from "react";
 
 // TODO: Import dependencies yang diperlukan
@@ -22,7 +22,7 @@ export function MusicPlayer() {
   // - Control buttons (play/pause, skip, volume)
 
   type PlayerStatus = 'playing' | 'paused' | 'loading';
-  const [playerState, setPlayerState] = useState<PlayerStatus>('loading');
+  const [playerState, setPlayerState] = useState<PlayerStatus>('paused');
   const [playerProgress, setPlayerProgress] = useState(35);
   const [volumeProgress, setVolumeProgress] = useState(70);
 
@@ -79,7 +79,7 @@ export function MusicPlayer() {
             <Image id="icon-player" src={iconPrevious} alt="icon-player" width={20} height={20} />
           </div>
           <div id="control-button-play" className="w-52 h-52 rounded-full flex items-center justify-center bg-primary-300">
-            <Image id="icon-player" src={iconPlay} alt="icon-player" width={20} height={20} />
+            <Image id="icon-player" src={playerState ==='paused' ? iconPause : iconPlay} alt="icon-player" width={20} height={20} />
           </div>
           <div id="control-button-next" className="w-36 h-36 rounded-md flex items-center justify-center bg-neutral-800">
             <Image id="icon-player" src={iconNext} alt="icon-player" width={20} height={20} />
