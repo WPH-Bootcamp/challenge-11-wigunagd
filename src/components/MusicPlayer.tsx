@@ -36,7 +36,7 @@ export function MusicPlayer() {
     const [playerState, setPlayerState] = useState<PlayerStatus>('paused');
     const volumeProgress = 70;
 
-    const playingDuration = 1000 * 60 * 0.2;
+    const playingDuration = 1000 * 60 * 3.75;
     const [currentMs, setCurrentMs] = useState(0);
     const progressPercentage = (currentMs / playingDuration) * 100;
     const playingTime = formatTime(playingDuration);
