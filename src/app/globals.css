@@ -183,6 +183,11 @@ body {
   font-family: var(--font-family-poppins);
 }
 
-@utility bg-album-gradient {
+.bg-album-gradient {
   background: linear-gradient(127.48deg, #7C3AED -5.18%, #DB2777 100.8%);
+}
+
+.hoverBtn{
+  background: white;
+  color: #000;
 }
