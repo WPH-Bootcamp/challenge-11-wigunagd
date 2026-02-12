@@ -1,0 +1,8 @@
+export { default as iconAlbumArt } from './icon-album-art.png'
+export { default as iconNext } from './icon-next.png'
+export { default as iconPause } from './icon-pause.png'
+export { default as iconPlay } from './icon-play.png'
+export { default as iconPrevious } from './icon-previous.png'
+export { default as iconRepeat } from './icon-repeat.png'
+export { default as iconShuffle } from './icon-shuffle.png'
+export { default as iconVolume } from './icon-volume.png'
