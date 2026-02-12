@@ -34,12 +34,12 @@ export function MusicPlayer() {
 
     type PlayerStatus = 'playing' | 'paused' | 'loading';
     const [playerState, setPlayerState] = useState<PlayerStatus>('paused');
-    const [volumeProgress, setVolumeProgress] = useState(70);
+    const volumeProgress = 70;
 
     const playingDuration = 1000 * 60 * 0.2;
     const [currentMs, setCurrentMs] = useState(0);
     const progressPercentage = (currentMs / playingDuration) * 100;
-    const [playingTime, setPlayingTime] = useState(formatTime(playingDuration));
+    const playingTime = formatTime(playingDuration);
     const [currentPlayingTime, setCurrentPlayingTime] = useState("0:00");
 
     const togglePlay = () => {
@@ -90,14 +90,6 @@ export function MusicPlayer() {
             window.removeEventListener("keydown", handleKeyDown);
         };
     }, [playerState]);
-
-    /* const handlePlayerProgressState = (newValue: number) => {
-      setPlayerProgress(Math.max(0, Math.min(newValue, 100)));
-    }
-  
-    const handleVolumeProgressState = (newValue: number) => {
-      setVolumeProgress(Math.max(0, Math.min(newValue, 100)));
-    } */
 
     const containerVariants = {
         playing: {
